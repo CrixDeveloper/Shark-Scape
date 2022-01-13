@@ -182,3 +182,4 @@ Material:
     - _SubSurfaceShallowCol: {r: 1, g: 1, b: 1, a: 1}
     - _SubSurfaceShallowColShadow: {r: 1, g: 1, b: 1, a: 1}
     - _SubSurfaceShallowColour: {r: 0.41999996, g: 0.75, b: 0.69, a: 1}
+  m_BuildTextureStacks: []
