@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/FPCSwimmer/Core/Scenes/SunMoonSkyDemo.unity
+    guid: ee6ddb91e9b3c014e84693c96b824d5d
   m_configObjects: {}
