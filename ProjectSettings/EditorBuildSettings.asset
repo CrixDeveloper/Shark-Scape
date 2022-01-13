@@ -6,6 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/8. Imports/FPCSwimmer/Core/Scenes/SunMoonSkyDemo.unity
-    guid: ee6ddb91e9b3c014e84693c96b824d5d
+    path: Assets/8. Imports/Interlude's/Interlude/Scenes/InterludeMenu.unity
+    guid: 0c3bf9bf68d86cf44a28cd05a8032b36
+  - enabled: 1
+    path: Assets/1. Scenes/MainMenu.unity
+    guid: 057a218941165014ab3d3dd1f6ecaec6
+  - enabled: 1
+    path: Assets/1. Scenes/MainLevel.unity
+    guid: f98e01da950b0ab4cae76e84b9161c6a
   m_configObjects: {}
