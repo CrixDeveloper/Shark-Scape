@@ -6,6 +6,7 @@ TagManager:
   tags:
   - OceanDepth
   - Enemy
+  - Collectable
   layers:
   - Default
   - TransparentFX

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -12,8 +10,9 @@ public class Enemy_Controller : MonoBehaviour
 
     [Header("References: ")]
     public GameObject sharkPrefab;
-    public Transform playerPrefab;
+    public Transform playerTarget;
     public NavMeshAgent sharkAgent;
+    public AudioClip playerHurtClip;
 
     [Header("Attributes: ")]
     public float sharkAgentSpeed = 3.5f;
@@ -42,14 +41,16 @@ public class Enemy_Controller : MonoBehaviour
 
     public void FollowPlayer()
     {
-        sharkAgent.destination = playerPrefab.position;
+        sharkAgent.destination = playerTarget.transform.position;
     }
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Player Bit");
+            Debug.Log("Player Biten");
+            closeSharkAS.PlayOneShot(playerHurtClip);
+            Player_Controller.playerHealth -= 25;
         }
     }
 
