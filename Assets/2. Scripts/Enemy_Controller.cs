@@ -14,7 +14,6 @@ public class Enemy_Controller : MonoBehaviour
     public GameObject sharkPrefab;
     public Transform playerPrefab;
     public NavMeshAgent sharkAgent;
-    public AudioClip closeToPlayer;
 
     [Header("Attributes: ")]
     public float sharkAgentSpeed = 3.5f;
@@ -28,6 +27,7 @@ public class Enemy_Controller : MonoBehaviour
     void Start()
     {
         closeSharkAS = GetComponent<AudioSource>();
+        sharkAgent = GetComponent<NavMeshAgent>();
     }
 
     // Update is called once per frame
@@ -40,10 +40,9 @@ public class Enemy_Controller : MonoBehaviour
 
     #region Main Methods: 
 
-    private void FollowPlayer()
+    public void FollowPlayer()
     {
-        closeSharkAS.PlayOneShot(closeToPlayer);
-        sharkAgent.SetDestination(playerPrefab.transform.position);
+        sharkAgent.destination = playerPrefab.position;
     }
 
     private void OnCollisionEnter(Collision collision)
