@@ -11,13 +11,11 @@ public class Player_Controller : MonoBehaviour
     [Header ("Attributes:")]
     public static int playerHealth = 100;
 
-    [Header("Canvas References:")]
-    public Text lifeSaverCounter;
-
     [Header("References:")]
-    public AudioClip lifeSaverCollected;
-
-
+    public Text lifeSaverCountText;
+    public AudioClip lsCollectedClip;
+    public GameObject lifeSaver;
+    
     #endregion
 
     #region Frame Dependent Methods: 
@@ -27,13 +25,14 @@ public class Player_Controller : MonoBehaviour
     {
         playerHealth = 100;
         playerAS = GetComponent<AudioSource>();
-        lifeSaverCounter.GetComponent<Text>().text = " " + lifeSaverCounter.ToString();
+        lifeSaver = GetComponent<GameObject>();
+        lifeSaverCountText.GetComponent<Text>().text = " " + lifeSaverCountText.ToString();
     }
 
     // Update is called once per frame
     void Update()
     {
-        lifeSaverCounter.GetComponent<Text>().text = " " + lifeSaverCounter.ToString();
+        
     }
 
     #endregion
@@ -44,9 +43,11 @@ public class Player_Controller : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Collectable"))
         {
-            playerAS.PlayOneShot(lifeSaverCollected);
-            Lifesaver.lifeSaverCount += 1;
-            lifeSaverCounter.GetComponent<Text>().text = " " + lifeSaverCounter.ToString();
+            Debug.Log("LifeSaver Collected");
+            playerAS.PlayOneShot(lsCollectedClip);
+            FindObjectOfType<Lifesaver>().IncreaseLifeSaverNumber();
+            lifeSaverCountText.text = Lifesaver.lifeSaverCount.ToString() + " ";
+            lifeSaver.gameObject.SetActive(false);
         }
     }
 

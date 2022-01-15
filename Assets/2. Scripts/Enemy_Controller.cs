@@ -44,6 +44,14 @@ public class Enemy_Controller : MonoBehaviour
         sharkAgent.destination = playerTarget.transform.position;
     }
 
+    private void ActivateShark()
+    {
+        if (Lifesaver.lifeSaverCount == 1)
+        {
+            sharkPrefab.SetActive(true);
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Player"))
