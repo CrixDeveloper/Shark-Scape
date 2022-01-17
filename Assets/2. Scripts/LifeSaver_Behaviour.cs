@@ -6,8 +6,11 @@ public class LifeSaver_Behaviour : MonoBehaviour
 {
     #region Variables to use: 
 
-    [Header("References: ")]
-    public GameObject lifeSaver;
+    [Header("Attributes")]
+    public static int lifeSaverCount;
+
+    // [Header("References: ")]
+    
 
     #endregion
 
@@ -29,13 +32,7 @@ public class LifeSaver_Behaviour : MonoBehaviour
 
     #region Main Methods: 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            lifeSaver.gameObject.SetActive(false);
-        }
-    }
+   
 
     #endregion
 }
