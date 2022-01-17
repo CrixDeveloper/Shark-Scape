@@ -341,6 +341,7 @@ GameObject:
   - component: {fileID: 3326941672431128117}
   - component: {fileID: 4562134933440905147}
   - component: {fileID: 4620228975432501537}
+  - component: {fileID: -2493948627080347613}
   m_Layer: 0
   m_Name: Lifesaver
   m_TagString: Collectable
@@ -522,3 +523,16 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 2.6818001, y: 2.7399578, z: 0.48525095}
   m_Center: {x: -0.0074460986, y: 0.026546288, z: 0.029574394}
+--- !u!114 &-2493948627080347613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3239793192163774987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 257c00b01c298ee41b55d36c26ef75f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifeSaver: {fileID: 3239793192163774987}
