@@ -9,7 +9,8 @@ public class LifeSaver_Behaviour : MonoBehaviour
     [Header("Attributes")]
     public static int lifeSaverCount;
 
-    // [Header("References: ")]
+    [Header("References: ")]
+    public Transform lifeSaver;
     
 
     #endregion
@@ -19,20 +20,23 @@ public class LifeSaver_Behaviour : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        lifeSaver.GetComponent<Transform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        Rotate();
     }
 
     #endregion
 
     #region Main Methods: 
 
-   
+    private void Rotate()
+    {
+        lifeSaver.transform.Rotate(new Vector3(0f, 30f, 0f) * Time.deltaTime);
+    }
 
     #endregion
 }

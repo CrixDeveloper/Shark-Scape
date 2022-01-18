@@ -7,9 +7,16 @@ public class Player_Controller : MonoBehaviour
 {
     #region Variables to use: 
 
+    // Private variables: 
+    protected AudioSource playerAS;
+
+    [Header("Attributes: ")]
+    public static int health = 100;
+
     [Header("References: ")]
     public GameObject lifeSaver;
     public Text lifeSaverText;
+    public AudioClip collectSound;
 
     #endregion
 
@@ -18,8 +25,8 @@ public class Player_Controller : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        lifeSaver.GetComponent<GameObject>();
-        lifeSaverText.GetComponent<Text>();
+        playerAS = GetComponent<AudioSource>();
+        lifeSaver.GetComponent<Text>();
     }
 
     // Update is called once per frame
@@ -36,6 +43,7 @@ public class Player_Controller : MonoBehaviour
     {
         if (other.tag == "Collectable")
         {
+            playerAS.PlayOneShot(collectSound);
             lifeSaver.SetActive(false);
             IncreaseLifeSaver();
             lifeSaverText.text = " " + LifeSaver_Behaviour.lifeSaverCount.ToString();
