@@ -7,7 +7,7 @@ public class LifeSaver_Behaviour : MonoBehaviour
     #region Variables to use: 
 
     [Header("Attributes")]
-    public static int lifeSaverCount;
+    public static int lifeSaverCount = 0;
 
     [Header("References: ")]
     public Transform lifeSaver;

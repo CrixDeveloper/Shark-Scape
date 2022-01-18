@@ -1,0 +1,57 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Game_Manager : MonoBehaviour
+{
+    #region Variables to use: 
+
+    [Header ("References:")]
+    public GameObject sharkEnemyGO;
+    public GameObject escapeText;
+    public GameObject tipText;
+
+    #endregion
+
+    #region Frame Dependent Methods: 
+
+    // Start is called before the first frame update
+    void Start()
+    {
+        #region GetComponents: 
+        sharkEnemyGO.GetComponent<GameObject>();
+        escapeText.GetComponent<GameObject>();
+        tipText.GetComponent<GameObject>();
+        #endregion 
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        CheckLifeSaverAmmount();
+    }
+
+    #endregion
+
+    #region Main Methods: 
+
+    private void CheckLifeSaverAmmount()
+    {
+        switch (LifeSaver_Behaviour.lifeSaverCount)
+        {
+            case 1:
+                sharkEnemyGO.SetActive(true);
+                break;
+            case 10:
+                tipText.SetActive(true);
+                Destroy(tipText, 10f);
+                break;
+            case 20:
+                escapeText.SetActive(true);
+                Destroy(escapeText, 10f);
+                break;
+        }
+    }
+
+    #endregion
+}

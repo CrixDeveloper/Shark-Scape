@@ -7,9 +7,13 @@ public class EnemyShark_Controller : MonoBehaviour
 {
     #region Variables to use: 
 
+    // Private Variables: 
+    protected AudioSource sharkAS;
+
     [Header("References: ")]
     public NavMeshAgent sharkAgent;
     public Transform playerTarget;
+    public AudioClip playerHurt;
 
     #endregion
 
@@ -20,6 +24,7 @@ public class EnemyShark_Controller : MonoBehaviour
     {
         sharkAgent.GetComponent<NavMeshAgent>();
         playerTarget.GetComponent<Transform>();
+        sharkAS = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -32,9 +37,20 @@ public class EnemyShark_Controller : MonoBehaviour
 
     #region Main Methods: 
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Player"))
+        {
+            Debug.Log("Player Hit");
+            Player_Controller.health -= 25;
+            sharkAS.PlayOneShot(playerHurt);
+        }
+    }
+
     private void FollowPlayer()
     {
         sharkAgent.destination = playerTarget.transform.position;
+        sharkAgent.gameObject.transform.LookAt(playerTarget);
     }
 
     #endregion

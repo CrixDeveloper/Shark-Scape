@@ -50,6 +50,17 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
+    private void OnCollisionStay(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Island") && LifeSaver_Behaviour.lifeSaverCount == 20)
+        {
+            if (Input.GetKeyDown(KeyCode.I))
+            {
+                Interlude.InterludeManager.KeyFound();
+            }
+        } 
+    }
+
     private void IncreaseLifeSaver()
     {
         LifeSaver_Behaviour.lifeSaverCount++;

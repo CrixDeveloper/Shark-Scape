@@ -7,6 +7,7 @@ TagManager:
   - OceanDepth
   - Enemy
   - Collectable
+  - Island
   layers:
   - Default
   - TransparentFX
