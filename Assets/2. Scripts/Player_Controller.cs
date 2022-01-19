@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -27,6 +26,8 @@ public class Player_Controller : MonoBehaviour
     {
         playerAS = GetComponent<AudioSource>();
         lifeSaver.GetComponent<Text>();
+
+        health = 100;
     }
 
     // Update is called once per frame

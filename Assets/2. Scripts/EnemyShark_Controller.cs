@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -42,14 +40,16 @@ public class EnemyShark_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Hit");
-            Player_Controller.health -= 25;
+            Player_Controller.health -= 100;
             sharkAS.PlayOneShot(playerHurt);
         }
     }
 
     private void FollowPlayer()
     {
+        sharkAgent = GetComponent<NavMeshAgent>();
         sharkAgent.destination = playerTarget.transform.position;
+        playerTarget = GetComponent<Transform>();
         sharkAgent.gameObject.transform.LookAt(playerTarget);
     }
 

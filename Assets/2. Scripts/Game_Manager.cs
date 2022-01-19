@@ -30,6 +30,7 @@ public class Game_Manager : MonoBehaviour
     void Update()
     {
         CheckLifeSaverAmmount();
+        CheckPlayerHealth();
     }
 
     #endregion
@@ -40,7 +41,7 @@ public class Game_Manager : MonoBehaviour
     {
         if (Player_Controller.health == 0)
         {
-            SceneManager.LoadScene("MainLevel");
+            SceneManager.LoadScene("InterludeMenu");
         }
     }
 

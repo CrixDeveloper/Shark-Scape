@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class LifeSaver_Behaviour : MonoBehaviour
@@ -7,7 +5,7 @@ public class LifeSaver_Behaviour : MonoBehaviour
     #region Variables to use: 
 
     [Header("Attributes")]
-    public static int lifeSaverCount = 10;
+    public static int lifeSaverCount = 0;
 
     [Header("References: ")]
     public Transform lifeSaver;
