@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Game_Manager : MonoBehaviour
 {
@@ -34,6 +35,14 @@ public class Game_Manager : MonoBehaviour
     #endregion
 
     #region Main Methods: 
+
+    private void CheckPlayerHealth()
+    {
+        if (Player_Controller.health == 0)
+        {
+            SceneManager.LoadScene("MainLevel");
+        }
+    }
 
     private void CheckLifeSaverAmmount()
     {

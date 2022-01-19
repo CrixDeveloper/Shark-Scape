@@ -50,15 +50,12 @@ public class Player_Controller : MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision collision)
+    private void OnTriggerStay(Collider other)
     {
-        if (collision.gameObject.CompareTag("Island") && LifeSaver_Behaviour.lifeSaverCount == 10)
+        if (other.tag == "Island")
         {
-            if (Input.GetKeyDown(KeyCode.I))
-            {
-                Interlude.InterludeManager.KeyFound();
-            }
-        } 
+            Interlude.InterludeManager.KeyFound();
+        }
     }
 
     private void IncreaseLifeSaver()
