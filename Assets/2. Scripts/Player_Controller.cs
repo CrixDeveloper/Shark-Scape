@@ -52,7 +52,7 @@ public class Player_Controller : MonoBehaviour
 
     private void OnCollisionStay(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Island") && LifeSaver_Behaviour.lifeSaverCount == 20)
+        if (collision.gameObject.CompareTag("Island") && LifeSaver_Behaviour.lifeSaverCount == 10)
         {
             if (Input.GetKeyDown(KeyCode.I))
             {

@@ -33,6 +33,13 @@ public class LifeSaver_Behaviour : MonoBehaviour
 
     #region Main Methods: 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            this.gameObject.SetActive(false);
+        }
+    }
     private void Rotate()
     {
         lifeSaver.transform.Rotate(new Vector3(0f, 30f, 0f) * Time.deltaTime);

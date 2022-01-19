@@ -42,11 +42,11 @@ public class Game_Manager : MonoBehaviour
             case 1:
                 sharkEnemyGO.SetActive(true);
                 break;
-            case 10:
+            case 5:
                 tipText.SetActive(true);
                 Destroy(tipText, 10f);
                 break;
-            case 20:
+            case 10:
                 escapeText.SetActive(true);
                 Destroy(escapeText, 10f);
                 break;
