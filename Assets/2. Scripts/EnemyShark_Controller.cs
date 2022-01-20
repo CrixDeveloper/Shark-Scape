@@ -40,7 +40,7 @@ public class EnemyShark_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Hit");
-            Player_Controller.health -= 10;
+            Player_Controller.health -= 25;
             sharkAS.PlayOneShot(playerHurt);
         }
     }

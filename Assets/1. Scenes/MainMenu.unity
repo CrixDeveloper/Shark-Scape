@@ -195,7 +195,8 @@ MonoBehaviour:
     m_VerticalOverflow: 1
     m_LineSpacing: 1
   m_Text: "Collect all Lifesavers before the shark kills you. \n\nBe careful when
-    the nigth comes. \n\nRun or swim faster holding Left Shift. "
+    the night comes. \n\nRun or swim faster holding Left Shift. \n\nTo Win reach
+    the lighthouse when all lifesavers are collected"
 --- !u!222 &516141403
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1362,7 +1363,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 04e8d48fd55e41343b9d70d5b7a07e96, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.8
   m_Pitch: 1

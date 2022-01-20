@@ -8,6 +8,8 @@ TagManager:
   - Enemy
   - Collectable
   - Island
+  - Door
+  - Key
   layers:
   - Default
   - TransparentFX

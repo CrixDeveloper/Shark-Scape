@@ -12,6 +12,11 @@ public class Game_Manager : MonoBehaviour
     public GameObject escapeText;
     public GameObject tipText;
 
+    [Header("Health References")]
+    public GameObject life75;
+    public GameObject life50;
+    public GameObject life25;
+
     #endregion
 
     #region Frame Dependent Methods: 
@@ -23,6 +28,9 @@ public class Game_Manager : MonoBehaviour
         sharkEnemyGO.GetComponent<GameObject>();
         escapeText.GetComponent<GameObject>();
         tipText.GetComponent<GameObject>();
+        life75.GetComponent<GameObject>();
+        life50.GetComponent<GameObject>();
+        life25.GetComponent<GameObject>();
         #endregion 
     }
 
@@ -39,9 +47,24 @@ public class Game_Manager : MonoBehaviour
 
     private void CheckPlayerHealth()
     {
-        if (Player_Controller.health == 0)
+        switch (Player_Controller.health)
         {
-            SceneManager.LoadScene("InterludeMenu");
+            case 75:
+                life75.SetActive(true);
+                break;
+            case 50:
+                life75.SetActive(false);
+                life50.SetActive(true);
+                break;
+            case 25:
+                life50.SetActive(false);
+                life25.SetActive(true);
+                break;
+            case 0:
+                SceneManager.LoadScene("InterludeMenu");
+                LifeSaver_Behaviour.lifeSaverCount = 0;
+                sharkEnemyGO.SetActive(false);
+                break;
         }
     }
 
