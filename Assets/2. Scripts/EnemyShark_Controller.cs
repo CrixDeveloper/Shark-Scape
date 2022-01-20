@@ -40,7 +40,7 @@ public class EnemyShark_Controller : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player Hit");
-            Player_Controller.health -= 100;
+            Player_Controller.health -= 10;
             sharkAS.PlayOneShot(playerHurt);
         }
     }
@@ -49,8 +49,7 @@ public class EnemyShark_Controller : MonoBehaviour
     {
         sharkAgent = GetComponent<NavMeshAgent>();
         sharkAgent.destination = playerTarget.transform.position;
-        playerTarget = GetComponent<Transform>();
-        sharkAgent.gameObject.transform.LookAt(playerTarget);
+        //sharkAgent.gameObject.transform.LookAt(playerTarget);
     }
 
     #endregion

@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class Player_Controller : MonoBehaviour
 {
@@ -53,9 +52,10 @@ public class Player_Controller : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Island")
+        if (other.tag == "Island" && LifeSaver_Behaviour.lifeSaverCount == 10)
         {
             Interlude.InterludeManager.KeyFound();
+            Time.timeScale = 0;
         }
     }
 
