@@ -55,7 +55,6 @@ public class Player_Controller : MonoBehaviour
         if (other.tag == "Key" && LifeSaver_Behaviour.lifeSaverCount == 10)
         {
             Interlude.InterludeManager.KeyFound();
-            Time.timeScale = 0;
         }
     }
 
