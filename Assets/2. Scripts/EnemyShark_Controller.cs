@@ -35,9 +35,9 @@ public class EnemyShark_Controller : MonoBehaviour
 
     #region Main Methods: 
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.tag == "Player")
         {
             Debug.Log("Player Hit");
             Player_Controller.health -= 25;
