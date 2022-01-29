@@ -52,9 +52,10 @@ public class Player_Controller : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Key" && LifeSaver_Behaviour.lifeSaverCount == 10)
+        if (other.tag == "Key" && LifeSaver_Behaviour.lifeSaverCount == 12)
         {
             Interlude.InterludeManager.KeyFound();
+            Time.timeScale = 0;
         }
     }
 

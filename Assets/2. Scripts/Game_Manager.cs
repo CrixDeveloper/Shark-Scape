@@ -61,9 +61,7 @@ public class Game_Manager : MonoBehaviour
                 life25.SetActive(true);
                 break;
             case 0:
-                SceneManager.LoadScene("InterludeMenu");
-                LifeSaver_Behaviour.lifeSaverCount = 0;
-                sharkEnemyGO.SetActive(false);
+                StartCoroutine(RestartGame());
                 break;
         }
     }
@@ -84,6 +82,15 @@ public class Game_Manager : MonoBehaviour
                 Destroy(escapeText, 10f);
                 break;
         }
+    }
+
+    private IEnumerator RestartGame()
+    {
+        yield return new WaitForSeconds(3f);
+        Time.timeScale = 0;
+        SceneManager.LoadScene("MainMenu");
+        LifeSaver_Behaviour.lifeSaverCount = 0;
+        sharkEnemyGO.SetActive(false);
     }
 
     #endregion

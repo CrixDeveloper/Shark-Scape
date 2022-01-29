@@ -12,6 +12,12 @@ public class MainMenu_Manager : MonoBehaviour
     #region Frame Dependent Methods: 
 
     // Start is called before the first frame update
+    private void Awake()
+    {
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     void Start()
     {
         
