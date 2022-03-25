@@ -23,6 +23,8 @@ public class Game_Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LifeSaver_Behaviour.lifeSaverCount = 0;
+
         #region GetComponents: 
         sharkEnemyGO.GetComponent<GameObject>();
         escapeText.GetComponent<GameObject>();

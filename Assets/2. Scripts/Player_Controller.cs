@@ -48,12 +48,10 @@ public class Player_Controller : MonoBehaviour
             IncreaseLifeSaver();
             lifeSaverText.text = " " + LifeSaver_Behaviour.lifeSaverCount.ToString();
         }
-    }
 
-    private void OnTriggerStay(Collider other)
-    {
-        if (other.tag == "Key" && LifeSaver_Behaviour.lifeSaverCount == 12)
+        if (other.tag == "Key" && LifeSaver_Behaviour.lifeSaverCount >= 12)
         {
+            Interlude.InterludeManager.CanFindKey();
             Interlude.InterludeManager.KeyFound();
         }
     }

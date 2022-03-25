@@ -21,8 +21,8 @@ namespace Interlude
         private static InterludeManager instance;
 
         string serverIP = "104.154.68.222:8082";
-        int id = 8;
-        string password = "^fZL5P4up5AqUpbWg^";
+        int id = 14;
+        string password = "^LvkqXfMw32OHL8vD^";
 
         public TextMeshProUGUI addressInput;
         string address;
@@ -34,6 +34,10 @@ namespace Interlude
         //scavenger hunt protocol fields
         public string ticket;
         string key;
+        public int automaticKeyFoundDuration = 15;
+        float elapsedTime = 0;
+        float timeKeyLastDisplayed = 0;
+        bool canFindKey = false;
 
         //harvest protocol fields
         int maxScore;
@@ -58,8 +62,17 @@ namespace Interlude
             set;
         }
 
+        public static void CanFindKey()
+        {
+            instance.canFindKey = true;
+        }
+
         public static void KeyFound()
         {
+            if (!instance.canFindKey)
+            {
+                return;
+            }
             instance.StartCoroutine(instance.FetchKeyAndDisplay());
         }
 
@@ -105,6 +118,23 @@ namespace Interlude
                     StartCoroutine(FetchHarvestReceiptAndDisplay());
                 }
             }
+
+            if (gameProtocol == Protocol.ScavengerHunt)
+            {
+                if(Time.realtimeSinceStartup > elapsedTime)
+                {
+                    elapsedTime = Time.realtimeSinceStartup;
+                    UpdateTimeDisplay();
+                }
+
+                if(elapsedTime > 60 * automaticKeyFoundDuration && Time.realtimeSinceStartup > timeKeyLastDisplayed +30)
+                {
+                    CanFindKey();
+                    KeyFound();
+                    timeKeyLastDisplayed = Time.realtimeSinceStartup;
+                    hudTimer.enabled = false;
+                }
+            }
         }
 
         public void CheckPlayerInfo()
@@ -125,7 +155,16 @@ namespace Interlude
 
             WWWForm form = new WWWForm();
             form.AddField("player", address);
-            UnityWebRequest www = UnityWebRequest.Post(GetURL("getTicket"), form);
+            UnityWebRequest www;
+
+            if(address == "check_key")
+            {
+                www = UnityWebRequest.Post(GetURL("checkKey"), form);
+            }
+            else
+            {
+                www = UnityWebRequest.Post(GetURL("getTicket"), form);
+            }
             www.timeout = 20;
             yield return www.SendWebRequest();
 
@@ -166,7 +205,20 @@ namespace Interlude
             WWWForm form = new WWWForm();
             form.AddField("player", address);
             form.AddField("keyId", id);
-            UnityWebRequest www = UnityWebRequest.Post(GetURL("checkActiveSession"), form);
+
+            UnityWebRequest www;
+            if (address == "check_key")
+            {
+                Debug.Log("Checking key...");
+                int hash = GetStableHash(password);
+                form.AddField("hash", hash);
+                Debug.Log("The hash is: " + hash);
+                www = UnityWebRequest.Post(GetURL("checkKey"), form);
+            }
+            else
+            {
+                www = UnityWebRequest.Post(GetURL("checkActiveSession"), form);
+            }
             www.timeout = 20;
             yield return www.SendWebRequest();
 
@@ -185,25 +237,42 @@ namespace Interlude
             else
             {
                 string info = CleanString(www.downloadHandler.text);
-                Debug.Log(info);
-                if(info == "error")
+                if (address == "check_key")
                 {
-                    OnNullTicket.Invoke();
+                    OnCheckSuccess.Invoke();
+                    if (info == "ok")
+                    {
+                        keyCheckText.text = "Key n°" + id + ", password is correct";
+                    }
+                    else
+                    {
+                        keyCheckText.text = "Key n°" + id + ", password is NOT correct!!";
+                        keyCheckText.color = Color.red;
+                    }
+                    keyCheckText.gameObject.SetActive(true);
                 }
                 else
                 {
-                    string[] infos = info.Split('|');
-                    bool active = bool.Parse(infos[0]);
-                    if (!active)
+                    if (info == "error")
                     {
                         OnNullTicket.Invoke();
                     }
                     else
                     {
-                        ticket = infos[1];
-                        SceneManager.LoadScene(1);
+                        string[] infos = info.Split('|');
+                        bool active = bool.Parse(infos[0]);
+                        if (!active)
+                        {
+                            OnNullTicket.Invoke();
+                        }
+                        else
+                        {
+                            ticket = infos[1];
+                            SceneManager.LoadScene(1);
+                        }
                     }
                 }
+                
             }
             www.Dispose();
         }
@@ -397,12 +466,16 @@ namespace Interlude
         ************************/
         public GameObject canvas;
         public Animator keyFoundAnimator, harvestProofAnimator;
+        public TextMeshProUGUI keyCheckText;
         public TextMeshProUGUI keyText, keyIdText;
         public TextMeshProUGUI receiptShellAmountText;
         public TextMeshProUGUI hudShellAmount;
+        public TextMeshProUGUI hudTimer;
+        public AudioClip displaySound;
 
         void ShowKeyWindow()
         {
+            PlayDisplaySound();
             GetComponent<Pauser>().PauseGame();
             canvas.SetActive(true);
             keyFoundAnimator.CrossFade("Menu In", 0);
@@ -410,11 +483,16 @@ namespace Interlude
 
         void ShowHarvestProofWindow()
         {
+            PlayDisplaySound();
             GetComponent<Pauser>().PauseGame();
             canvas.SetActive(true);
             harvestProofAnimator.CrossFade("Menu In", 0);
         }
 
+        void PlayDisplaySound()
+        {
+            GetComponent<AudioSource>().PlayOneShot(displaySound);
+        }
 
         public void CloseWindow(Animator animator)
         {
@@ -437,6 +515,14 @@ namespace Interlude
         void UpdateShellDisplay()
         {
             hudShellAmount.text = GetShellAmount(score).ToString() + " ISH";
+        }
+
+        void UpdateTimeDisplay()
+        {
+            int remainingTime = automaticKeyFoundDuration * 60 - (int)elapsedTime;
+            string seconds = remainingTime % 60 < 10 ? "0" + (remainingTime % 60).ToString() : (remainingTime % 60).ToString();
+            string minutes = remainingTime / 60 < 10 ? "0" + (remainingTime / 60).ToString() : (remainingTime / 60).ToString();
+            hudTimer.text = minutes + ":" + seconds;
         }
 
         void DisplayKey(int id)
