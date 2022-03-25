@@ -24,6 +24,7 @@ public class Game_Manager : MonoBehaviour
     void Start()
     {
         LifeSaver_Behaviour.lifeSaverCount = 0;
+        sharkEnemyGO.SetActive(false);
 
         #region GetComponents: 
         sharkEnemyGO.GetComponent<GameObject>();

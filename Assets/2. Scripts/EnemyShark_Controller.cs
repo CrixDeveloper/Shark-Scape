@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -7,11 +8,14 @@ public class EnemyShark_Controller : MonoBehaviour
 
     // Private Variables: 
     protected AudioSource sharkAS;
+    private float speedMultiplier = 1.5f;
 
-    [Header("References: ")]
+    [Header("References & Attributes: ")]
     public NavMeshAgent sharkAgent;
     public Transform playerTarget;
     public AudioClip playerHurt;
+
+    public float sharkAgentSpeed = 15f;
 
     #endregion
 
@@ -49,8 +53,32 @@ public class EnemyShark_Controller : MonoBehaviour
     {
         sharkAgent = GetComponent<NavMeshAgent>();
         sharkAgent.destination = playerTarget.transform.position;
-        //sharkAgent.gameObject.transform.LookAt(playerTarget);
     }
 
+    private void SpeedUpSharkAgent()
+    {
+        switch (LifeSaver_Behaviour.lifeSaverCount)
+        {
+            case 4:
+                sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
+                StartCoroutine(SlowDownShark());
+                break;
+            case 8:
+                sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
+                StartCoroutine(SlowDownShark());
+                break;
+            case 12:
+                sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
+                StartCoroutine(SlowDownShark());
+                break;
+
+        }
+    }
+
+    private IEnumerator SlowDownShark()
+    {
+        yield return new WaitForSeconds(5f);
+        sharkAgent.speed = sharkAgentSpeed;
+    }
     #endregion
 }
