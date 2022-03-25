@@ -10,7 +10,6 @@ public class LifeSaver_Behaviour : MonoBehaviour
     [Header("References: ")]
     public Transform lifeSaver;
     
-
     #endregion
 
     #region Frame Dependent Methods: 

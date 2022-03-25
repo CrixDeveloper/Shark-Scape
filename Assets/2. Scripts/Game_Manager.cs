@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -73,11 +72,11 @@ public class Game_Manager : MonoBehaviour
             case 1:
                 sharkEnemyGO.SetActive(true);
                 break;
-            case 5:
+            case 4:
                 tipText.SetActive(true);
                 Destroy(tipText, 10f);
                 break;
-            case 10:
+            case 12:
                 escapeText.SetActive(true);
                 Destroy(escapeText, 10f);
                 break;
@@ -86,9 +85,8 @@ public class Game_Manager : MonoBehaviour
 
     private IEnumerator RestartGame()
     {
-        yield return new WaitForSeconds(3f);
-        Time.timeScale = 0;
-        SceneManager.LoadScene("MainMenu");
+        yield return new WaitForSeconds(1.5f);
+        SceneManager.LoadScene("MainLevel");
         LifeSaver_Behaviour.lifeSaverCount = 0;
         sharkEnemyGO.SetActive(false);
     }
