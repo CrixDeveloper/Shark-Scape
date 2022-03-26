@@ -248,3 +248,6 @@ MonoBehaviour:
   sharkAgent: {fileID: 901810916567432501}
   playerTarget: {fileID: 0}
   playerHurt: {fileID: 8300000, guid: 7e91ae762a2a8134da0c6a51804f6fea, type: 3}
+  count: 0
+  duracionDeLaSpeed: 5
+  incrementar: 0

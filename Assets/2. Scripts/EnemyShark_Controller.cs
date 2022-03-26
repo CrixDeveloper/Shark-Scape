@@ -8,15 +8,15 @@ public class EnemyShark_Controller : MonoBehaviour
 
     // Private Variables: 
     protected AudioSource sharkAS;
-    private float speedMultiplier = 1.5f;
 
     [Header("References & Attributes: ")]
     public NavMeshAgent sharkAgent;
     public Transform playerTarget;
     public AudioClip playerHurt;
 
-    public float sharkAgentSpeed = 15f;
-
+    public int count;
+    public float duracionDeLaSpeed;
+    public bool incrementar;
     #endregion
 
     #region Frame Dependent Methods: 
@@ -33,6 +33,9 @@ public class EnemyShark_Controller : MonoBehaviour
     void Update()
     {
         FollowPlayer();
+        //SpeedUpSharkAgent();
+
+        SubirVelocidad();
     }
 
     #endregion
@@ -55,30 +58,189 @@ public class EnemyShark_Controller : MonoBehaviour
         sharkAgent.destination = playerTarget.transform.position;
     }
 
-    private void SpeedUpSharkAgent()
+    private void SubirVelocidad()
     {
-        switch (LifeSaver_Behaviour.lifeSaverCount)
+        if (LifeSaver_Behaviour.lifeSaverCount == 4)
         {
-            case 4:
-                sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
-                StartCoroutine(SlowDownShark());
-                break;
-            case 8:
-                sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
-                StartCoroutine(SlowDownShark());
-                break;
-            case 12:
-                sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
-                StartCoroutine(SlowDownShark());
-                break;
+            incrementar = true;
 
+            if (incrementar)
+            {
+                duracionDeLaSpeed -= Time.deltaTime;
+
+                if (count == 0)
+                {
+                    sharkAgent.speed = sharkAgent.speed + 5;
+                    count = 1;
+                }
+                if (duracionDeLaSpeed <= 0)
+                {
+                    sharkAgent.speed = 15f;
+                    duracionDeLaSpeed = 5f;
+                    count = 0;
+                    incrementar = false;
+                }
+            }
+        }
+        else if (LifeSaver_Behaviour.lifeSaverCount > 4)
+        {
+            sharkAgent.speed = 15f;
+            duracionDeLaSpeed = 5f;
+            count = 0;
+            incrementar = false;
+        }
+
+
+        if (LifeSaver_Behaviour.lifeSaverCount == 6)
+        {
+            incrementar = true;
+
+            if (incrementar)
+            {
+                duracionDeLaSpeed -= Time.deltaTime;
+
+                if (count == 0)
+                {
+                    sharkAgent.speed = sharkAgent.speed + 6;
+                    count = 1;
+                }
+                if (duracionDeLaSpeed <= 0)
+                {
+                    sharkAgent.speed = 15f;
+                    duracionDeLaSpeed = 5f;
+                    count = 0;
+                    incrementar = false;
+                }
+            }
+        }
+        else if (LifeSaver_Behaviour.lifeSaverCount > 6)
+        {
+            sharkAgent.speed = 15f;
+            duracionDeLaSpeed = 5f;
+            count = 0;
+            incrementar = false;
+        }
+
+
+        if (LifeSaver_Behaviour.lifeSaverCount == 8)
+        {
+            incrementar = true;
+
+            if (incrementar)
+            {
+                duracionDeLaSpeed -= Time.deltaTime;
+
+                if (count == 0)
+                {
+                    sharkAgent.speed = sharkAgent.speed + 7;
+                    count = 1;
+                }
+                if (duracionDeLaSpeed <= 0)
+                {
+                    sharkAgent.speed = 15f;
+                    duracionDeLaSpeed = 5f;
+                    count = 0;
+                    incrementar = false;
+                }
+            }
+        }
+        else if (LifeSaver_Behaviour.lifeSaverCount > 8)
+        {
+            sharkAgent.speed = 15f;
+            duracionDeLaSpeed = 5f;
+            count = 0;
+            incrementar = false;
+        }
+
+
+        if (LifeSaver_Behaviour.lifeSaverCount == 10)
+        {
+            incrementar = true;
+
+            if (incrementar)
+            {
+                duracionDeLaSpeed -= Time.deltaTime;
+
+                if (count == 0)
+                {
+                    sharkAgent.speed = sharkAgent.speed + 8;
+                    count = 1;
+                }
+                if (duracionDeLaSpeed <= 0)
+                {
+                    sharkAgent.speed = 15f;
+                    duracionDeLaSpeed = 5f;
+                    count = 0;
+                    incrementar = false;
+                }
+            }
+        }
+        else if (LifeSaver_Behaviour.lifeSaverCount > 10)
+        {
+            sharkAgent.speed = 15f;
+            duracionDeLaSpeed = 5f;
+            count = 0;
+            incrementar = false;
+        }
+
+
+        if (LifeSaver_Behaviour.lifeSaverCount == 12)
+        {
+            incrementar = true;
+
+            if (incrementar)
+            {
+                duracionDeLaSpeed -= Time.deltaTime;
+
+                if (count == 0)
+                {
+                    sharkAgent.speed = sharkAgent.speed + 9;
+                    count = 1;
+                }
+                if (duracionDeLaSpeed <= 0)
+                {
+                    sharkAgent.speed = 15f;
+                    duracionDeLaSpeed = 5f;
+                    count = 0;
+                    incrementar = false;
+                }
+            }
+        }
+        else if (LifeSaver_Behaviour.lifeSaverCount > 12)
+        {
+            sharkAgent.speed = 15f;
+            duracionDeLaSpeed = 5f;
+            count = 0;
+            incrementar = false;
         }
     }
 
-    private IEnumerator SlowDownShark()
-    {
-        yield return new WaitForSeconds(5f);
-        sharkAgent.speed = sharkAgentSpeed;
-    }
+
+
+    //private void SpeedUpSharkAgent()
+    //{
+    //    switch (LifeSaver_Behaviour.lifeSaverCount)
+    //    {
+    //        case 4:
+    //            sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
+    //            StartCoroutine(SlowDownShark());
+    //            break;
+    //        case 8:
+    //            sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
+    //            StartCoroutine(SlowDownShark());
+    //            break;
+    //        case 12:
+    //            sharkAgent.speed = sharkAgentSpeed * speedMultiplier;
+    //            StartCoroutine(SlowDownShark());
+    //            break;
+
+    //    }
+    //}
+
+    //private IEnumerator SlowDownShark()
+    //{
+    //    yield return new WaitForSeconds(5f);
+    //    sharkAgent.speed = sharkAgentSpeed;
+    //}
     #endregion
 }
